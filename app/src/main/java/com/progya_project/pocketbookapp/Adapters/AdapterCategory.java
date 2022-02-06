@@ -3,6 +3,7 @@ package com.progya_project.pocketbookapp.Adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.progya_project.pocketbookapp.AdminPdfListActivity;
 import com.progya_project.pocketbookapp.Filters.FilterCategory;
 import com.progya_project.pocketbookapp.ModelClasses.ModelCategory;
 import com.progya_project.pocketbookapp.R;
@@ -85,6 +87,16 @@ public class AdapterCategory extends  RecyclerView.Adapter<AdapterCategory.Holde
             }
         });
 
+        //handle item click,goto AdminPdfListActivity,alsp pass pdf categoryId
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, AdminPdfListActivity.class);
+                intent.putExtra("categoryId",id);
+                intent.putExtra("categoryTitle",category);
+                context.startActivity(intent);
+            }
+        });
     }
 
     private void deleteCategory(ModelCategory model, HolderCategory holder) {
